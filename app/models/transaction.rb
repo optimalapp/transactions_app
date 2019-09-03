@@ -3,6 +3,10 @@ class Transaction < ApplicationRecord
   after_create :set_transaction_uuid
   after_create :set_user_transactions_sum
 
+  def self.delete_older_than(minutes)
+    Transaction.all.each { |t| ((Time.now - t.created_at) / 60) > minutes ? t.destroy : nil }
+  end
+
   private
 
   def set_transaction_uuid

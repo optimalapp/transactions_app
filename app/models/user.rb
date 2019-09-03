@@ -9,8 +9,6 @@ class User < ApplicationRecord
     self.status == 'active' ? true : false
   end
 
-  private
-
   def self.import_new_users(file)
     CSV.foreach(File.path(file), headers: true) do |row|
       row = row.to_hash
