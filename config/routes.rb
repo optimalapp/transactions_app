@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  post 'transaction', to: 'merchants#transaction', as: 'transaction'
+  post 'transaction', to: 'users#transaction', as: 'transaction'
 end

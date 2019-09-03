@@ -16,25 +16,26 @@ ActiveRecord::Schema.define(version: 2019_08_31_171602) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "merchants", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.string "email"
-    t.string "status"
-    t.integer "total_transaction_sum"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_merchants_on_email", unique: true
-  end
-
   create_table "transactions", force: :cascade do |t|
-    t.integer "amount"
+    t.decimal "amount", precision: 15, scale: 2, default: "0.0"
     t.string "status"
-    t.integer "merchant_id"
+    t.integer "user_id"
     t.uuid "uuid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["uuid"], name: "index_transactions_on_uuid"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "role", default: "merchant"
+    t.text "description"
+    t.string "email"
+    t.string "status"
+    t.decimal "total_transaction_sum", precision: 15, scale: 2, default: "0.0"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "uuid_extensions", force: :cascade do |t|
