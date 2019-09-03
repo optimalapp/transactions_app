@@ -1,8 +1,13 @@
 class User < ApplicationRecord
   require 'csv'
+  scope :active, -> { where status: 'active' }
   has_many :transactions, dependent: :destroy
   validates :name, presence: true
   validates :email, presence: true
+
+  def active?
+    self.status == 'active' ? true : false
+  end
 
   private
 
