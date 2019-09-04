@@ -1,9 +1,15 @@
 class UsersController < ApplicationController
   def transaction
     begin
-      user = User.find(transaction_params[:user_id])
+      xml_params = xml_params_hash
+      t_params = if xml_params.any?
+                   transaction_params.merge!(xml_params)
+                 else
+                   transaction_params
+                 end
+      user = User.find(t_params[:user_id])
       if user && user.active?
-        transaction = user.transactions.create(transaction_params.except(:user_id))
+        transaction = user.transactions.create(t_params.except(:user_id))
         if transaction.valid?
           render json: { status: 200, message: { transaction: transaction.as_json(except: [:created_at, :updated_at]) } }
         else
@@ -26,5 +32,14 @@ class UsersController < ApplicationController
 
   def render_not_found_json
     render json: { status: 404, message: "No such user found or it's inactive" }, status: 404
+  end
+
+  def xml_params_hash
+    xml_string = request.body.read
+    begin
+      xml_params = helpers.xml_to_hash(xml_string)
+    rescue
+      xml_params ||= {}
+    end
   end
 end
