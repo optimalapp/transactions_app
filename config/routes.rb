@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
-  post 'transaction', to: 'users#transaction', as: 'transaction'
+  resources :users, only: [:index, :edit, :destroy] do
+    post 'transaction', to: 'users#transaction', as: 'transaction'
+  end
 end
