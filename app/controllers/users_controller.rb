@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include UsersDoc
+
   def transaction
     begin
       xml_params = xml_params_hash

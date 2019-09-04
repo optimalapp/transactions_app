@@ -1,24 +1,14 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+####**Application setup**
+```
+- bundle
+- rake db:create db:migrate
+- rails s
+```
+####**Importing users**
+```
+- rake users:import #from users.csv file located in lib/assets
+```
+####**API**
+```
+- *http://localhost:3000/apipie/1.0/users/transaction.html*
+```

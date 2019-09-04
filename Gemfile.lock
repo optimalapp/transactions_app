@@ -58,6 +58,8 @@ GEM
       zeitwerk (~> 2.1, >= 2.1.8)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    apipie-rails (0.5.16)
+      rails (>= 4.1)
     ast (2.4.0)
     autoprefixer-rails (9.6.1.1)
       execjs
@@ -308,6 +310,7 @@ PLATFORMS
   x86-mswin32
 
 DEPENDENCIES
+  apipie-rails
   bootsnap (>= 1.4.2)
   bootstrap-sass (~> 3.4.1)
   byebug
