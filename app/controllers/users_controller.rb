@@ -56,7 +56,8 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :description, :email)
+    user_params = params.require(:user).permit(:status, :name, :description, :email)
+    user_params.merge(params.permit(:status))
   end
 
   def render_not_found_json

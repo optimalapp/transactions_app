@@ -9,11 +9,15 @@
           <%= f.label 'Description', class:'control-label' %><br>
           <%= f.text_area :description,class:'form-control' %><br>
 
-          <%= f.label 'Email',class:'control-labe' %><br>
-          <%= f.text_field :email,class:'form-control' %><br>
+          <%= f.label 'Email', class:'control-labe' %><br>
+          <%= f.text_field :email, class:'form-control' %><br>
 
-          <%= f.submit "Submit changes", class:'btn btn-default' %>
-          <%= link_to 'Cancel', users_path, class:'btn btn-default' %>
+          <%= f.label 'Status', class:'control-labe' %><br>
+          <%= select_tag "status", raw('<option>active</option><option>inactive</option>'), method: :patch, class:'form-control'%>
+          <div style="margin-top:20px;">
+            <%= f.submit "Submit changes", class:'btn btn-default' %>
+            <%= link_to 'Cancel', users_path, class:'btn btn-default' %>
+          </div>
         <% end %>
       </div>
     </div>
