@@ -7,8 +7,8 @@
 ####**Importing users**
 ```
 - rake users:import #from users.csv file located in lib/assets
+- rake db:seed #Add mock transactions for existing users
 ```
-
 ####**Cron jobs**
 ```
 - whenever -i #Running cron job (background deleting transactions older than an hour).
