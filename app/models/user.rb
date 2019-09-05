@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :transactions, dependent: :destroy
   validates :name, presence: true
   validates :email, presence: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   def active?
     status == 'active'
