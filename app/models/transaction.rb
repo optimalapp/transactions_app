@@ -4,8 +4,7 @@ class Transaction < ApplicationRecord
   belongs_to :user
   after_create :set_transaction_uuid
   after_create :set_user_transactions_sum
-  validates :amount, presence: true
-  validates :amount, numericality: true
+  validates :amount, presence: true, numericality: true
 
   default_scope { order('created_at DESC') }
 

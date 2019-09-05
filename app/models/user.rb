@@ -5,8 +5,7 @@ class User < ApplicationRecord
   scope :active, -> { where status: 'active' }
   has_many :transactions, dependent: :destroy
   validates :name, presence: true
-  validates :email, presence: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   def active?
     status == 'active'
