@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   require 'csv'
   scope :active, -> { where status: 'active' }
@@ -6,7 +8,7 @@ class User < ApplicationRecord
   validates :email, presence: true
 
   def active?
-    self.status == 'active' ? true : false
+    status == 'active'
   end
 
   def self.import_new_users(file)

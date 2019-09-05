@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Uuid</th>
+            <th><%= link_to 'Back', users_path %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user_transactions.each do |transaction| %>
+            <tr>
+              <td><%=transaction[:amount]%></td>
+              <td><%=transaction[:status]%></td>
+              <td><%=transaction[:uuid]%></td>
+              <td></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
