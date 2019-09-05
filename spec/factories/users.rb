@@ -6,7 +6,7 @@ FactoryBot.define do
     description { 'Velit molestias vel numquam.' }
     email { 'clayton@gradykiehn.net' }
     status { 'active' }
-    total_transaction_sum { 730 }
+    total_transaction_sum { 0 }
   end
 
   factory :random_user do
@@ -14,6 +14,6 @@ FactoryBot.define do
     description { Faker::Lorem.sentence }
     email { Faker::Internet.email }
     stratus { 'active' }
-    total_transaction_sum { rand(550) }
+    total_transaction_sum { 0 }
   end
 end
