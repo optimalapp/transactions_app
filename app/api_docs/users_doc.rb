@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module UsersDoc
   extend Apipie::DSL::Concern
   api :POST, '/users/:id/transaction'
-  formats ['json', 'xml']
+  formats %w[json xml]
   example <<-EOS
   {"amount":"100.00"}
   EOS

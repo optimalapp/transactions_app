@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     user = User.find(t_params[:user_id])
     if user&.active?
       transaction = user.transactions.create(t_params.except(:user_id))
-      if transaction.valid?
+      if transaction.valid? && t_params[:amount] != '0'
         render json: { status: 200, message: { transaction: transaction.as_json(except: %i[created_at updated_at]) } }
       else
         transaction.update(amount: 0, status: 'error')

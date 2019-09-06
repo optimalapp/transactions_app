@@ -11,7 +11,6 @@ RSpec.describe Transaction, type: :model do
     expect(build(:transaction, amount: nil)).to_not be_valid
   end
   it 'has a generated uuid attribute' do
-    uuid = transaction.user.transactions.first.uuid
-    expect(transaction).to have_attributes(uuid: uuid)
+    expect(transaction.uuid.is_a?(String)).to eq(true)
   end
 end

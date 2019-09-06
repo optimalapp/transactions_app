@@ -15,7 +15,7 @@ class User < ApplicationRecord
     CSV.foreach(File.path(file), headers: true) do |row|
       row = row.to_hash
       user = User.find_by(name: row['name'], email: row['email'])
-      user.nil? ? User.create(row) : nil
+      User.create(row) if user.nil?
     end
   end
 end

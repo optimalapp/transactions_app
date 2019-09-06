@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 require 'support/factory_bot'
+require 'selenium/webdriver'
+
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
@@ -43,7 +47,7 @@ RSpec.configure do |config|
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
-  #
+
   # You can disable this behaviour by removing the line below, and instead
   # explicitly tag your specs with their type, e.g.:
   #
@@ -59,4 +63,25 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.include Capybara::DSL
+  Capybara.register_driver :selenium do |app|
+    chrome_options = Selenium::WebDriver::Chrome::Options.new.tap do |o|
+      # o.add_argument '--headless'
+      # o.add_argument '--no-sandbox'
+      # o.add_argument '--lang=en-us'
+      # o.add_argument '--disable-gpu'
+      # o.add_argument '--window-size=1920,1080'
+      # o.add_argument '--disable-dev-shm-usage'
+      # o.add_argument '--disable-infobars'
+      # o.add_argument '--disable-extensions'
+      # o.add_argument '--disable-popup-blocking'
+      # o.add_argument '--disable-setuid-sandbox'
+      # o.add_argument '--enable-features=NetworkService,NetworkServiceInProcess'
+      # o.add_argument '--disable-features=VizDisplayCompositor'
+    end
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
+  end
+  Capybara.default_driver = :selenium
+  Capybara.server_port = 3000
+  # Capybara.javascript_driver = :webkit
 end
