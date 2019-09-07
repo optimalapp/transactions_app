@@ -49,8 +49,8 @@ end
 def xml_params_hash
   xml_string = request.body.read
   begin
-    xml_params = helpers.xml_to_hash(xml_string)
+    helpers.xml_to_hash(xml_string)
   rescue StandardError
-    xml_params ||= {}
+    {}
   end
 end
