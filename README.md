@@ -15,5 +15,5 @@
 ```
 **API**
 ```
-- *http://localhost:3000/apipie/1.0/users/transaction.html*
+- http://localhost:3000/apipie/1.0/transactions.html
 ```

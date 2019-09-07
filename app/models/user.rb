@@ -11,11 +11,16 @@ class User < ApplicationRecord
     status == 'active'
   end
 
-  def self.import_new_users(file)
-    CSV.foreach(File.path(file), headers: true) do |row|
-      row = row.to_hash
+  def self.import_new_users(_file)
+    get_users_rows(_file) do |row|
       user = User.find_by(name: row['name'], email: row['email'])
       User.create(row) if user.nil?
+    end
+  end
+
+  def self.get_users_rows(file)
+    CSV.foreach(File.path(file), headers: true) do |row|
+      yield row.to_hash
     end
   end
 end

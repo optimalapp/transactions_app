@@ -5,10 +5,6 @@ Rails.application.routes.draw do
   apipie
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
-  resources :users, only: %i[index edit update destroy] do
-    post 'transaction', to: 'users#transaction', as: 'transaction'
-  end
-
-  resources :transactions, only: [:show] do
-  end
+  resources :users, only: %i[index edit update destroy]
+  resources :transactions, only: %i[create show]
 end

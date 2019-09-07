@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
-module UsersDoc
+module TransactionsDoc
   extend Apipie::DSL::Concern
-  api :POST, '/users/:id/transaction'
+  api :POST, '/transactions'
   formats %w[json xml]
-  example <<-EOS
-  {"amount":"100.00"}
-  EOS
-  example <<-EOS
-  <amount>100</amount>
-  EOS
+  param :user_id, Integer, desc: 'User ID', required: true
+  param :amount, BigDecimal, desc: 'Transaction Amount', required: true
   example <<-EOS
   {
     "status": 200,
@@ -23,12 +19,6 @@ module UsersDoc
         }
     }
   }
-  EOS
-  example <<-EOS
-  {"amount":"qwerty"}
-  EOS
-  example <<-EOS
-  <amount>qwerty</amount>
   EOS
   example <<-EOS
   {
@@ -45,5 +35,5 @@ module UsersDoc
   }
   EOS
 
-  def transaction; end
+  def create; end
 end
