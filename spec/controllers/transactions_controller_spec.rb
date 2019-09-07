@@ -9,11 +9,11 @@ RSpec.describe TransactionsController, type: :request, format: :json do
     user.reload
     expect(response.body).to include(user.total_transaction_sum.to_s)
   end
-  # it 'accepts a transaction via XML' do
-  # post transactions_path, params: "<amount>#{amount}</amount><user_id>#{user.id}</user_id>}"
-  # user.reload
-  # expect(response.body).to include(user.total_transaction_sum.to_s)
-  # end
+  it 'accepts a transaction via XML' do
+    post transactions_path, params: "<transaction><amount>#{amount}</amount><user_id>#{user.id}</user_id></transaction>"
+    user.reload
+    expect(response.body).to include(user.total_transaction_sum.to_s)
+  end
   it 'saves a invalid transaction of an existing user (active)' do
     amount = 0
     post transactions_path, params: { amount: amount, user_id: user.id }
