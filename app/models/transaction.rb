@@ -9,7 +9,7 @@ class Transaction < ApplicationRecord
   default_scope { order('created_at DESC') }
 
   def self.delete_older_than(minutes)
-    Transaction.all.each { |t| ((Time.now - t.created_at) / 60) > minutes ? t.destroy : nil }
+    Transaction.all.each { |t| t.destroy if ((Time.now - t.created_at) / 60) > minutes }
   end
 
   private
